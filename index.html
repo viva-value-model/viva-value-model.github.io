@@ -124,34 +124,6 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Key Contributions</h2>
-                <div class="content has-text-justified">
-                    <ul>
-                        <li>
-                            We identify that <strong>value estimation in robotic reinforcement learning is fundamentally 
-                            a future anticipation problem</strong>. Video generative models, trained to capture spatiotemporal 
-                            evolution, offer a more natural foundation for value learning than discriminative VLMs trained 
-                            on static data.
-                        </li>
-                        <li>
-                            We introduce <strong>ViVa</strong>, a video-generative value model that intrinsically couples 
-                            value with foresight by jointly predicting future embodiment dynamics alongside the current value.
-                        </li>
-                        <li>
-                            ViVa achieves <strong>substantial gains on box assembly</strong> in both success rate and 
-                            throughput. Qualitative analysis across all three tasks confirms more reliable value signals 
-                            and strong generalization to novel objects.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="section">
     <div class="container is-max-desktop">
@@ -217,148 +189,94 @@
     </div>
 </section>
 
-<section class="section" id="qualitative-results">
+<section class="section" id="qualitative-indomain">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column">
-                <h2 class="title is-3">Qualitative Results</h2>
+                <h2 class="title is-3">Qualitative Results: In-Domain</h2>
                 <div class="content has-text-justified">
                     <p>
-                        We show qualitative demonstrations of ViVa across four real-world manipulation tasks:
-                        <strong>Box Packaging</strong>, <strong>Pants Folding</strong>, <strong>Paper Organizing</strong>,
-                        and <strong>Shirt Folding</strong>. Each task includes multiple rollout examples showcasing
-                        ViVa's reliable value estimation and strong generalization capabilities.
+                        We demonstrate ViVa on three in-domain manipulation tasks: <strong>Box Packaging</strong>,
+                        <strong>Paper Organizing</strong>, and <strong>Shirt Folding</strong>. ViVa produces
+                        reliable value signals that accurately track task progress throughout each rollout.
                     </p>
                 </div>
 
-                <!-- Task Tabs -->
-                <div class="tabs is-centered is-boxed is-medium" id="task-tabs">
+                <div class="tabs is-centered is-boxed is-medium" id="indomain-tabs">
                     <ul>
-                        <li class="is-active" data-task="box_packaging"><a>Box Packaging</a></li>
-                        <li data-task="pants_folding"><a>Pants Folding</a></li>
-                        <li data-task="paper_organizing"><a>Paper Organizing</a></li>
-                        <li data-task="shirt_folding"><a>Shirt Folding</a></li>
+                        <li class="is-active" data-group="indomain" data-task="box_packaging"><a>Box Packaging</a></li>
+                        <li data-group="indomain" data-task="paper_organizing"><a>Paper Organizing</a></li>
+                        <li data-group="indomain" data-task="shirt_folding"><a>Shirt Folding</a></li>
                     </ul>
                 </div>
 
-                <!-- Box Packaging -->
-                <div class="task-content" id="tab-box_packaging">
+                <div class="task-content indomain-content" id="indomain-box_packaging">
                     <div class="columns is-multiline">
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
-                <!-- Pants Folding -->
-                <div class="task-content" id="tab-pants_folding" style="display:none;">
+                <div class="task-content indomain-content" id="indomain-paper_organizing" style="display:none;">
                     <div class="columns is-multiline">
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
-                <!-- Paper Organizing -->
-                <div class="task-content" id="tab-paper_organizing" style="display:none;">
+                <div class="task-content indomain-content" id="indomain-shirt_folding" style="display:none;">
                     <div class="columns is-multiline">
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4"></video></div>
+                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
-                <!-- Shirt Folding -->
-                <div class="task-content" id="tab-shirt_folding" style="display:none;">
-                    <div class="columns is-multiline">
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="column is-half">
-                            <p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;">
-                                <source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="qualitative-outdomain">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column">
+                <h2 class="title is-3">Qualitative Results: Out-of-Domain</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We further evaluate ViVa on <strong>Pants Folding</strong>, a task involving novel objects
+                        unseen during training. By leveraging spatiotemporal priors from large-scale video corpora,
+                        ViVa generalizes effectively to this out-of-domain setting, demonstrating robust value
+                        estimation beyond the training distribution.
+                    </p>
+                </div>
+
+                <div class="columns is-multiline">
+                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
+                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4"></video></div>
+                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
+                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4"></video></div>
+                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
+                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4"></video></div>
+                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
+                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4"></video></div>
                 </div>
 
             </div>
