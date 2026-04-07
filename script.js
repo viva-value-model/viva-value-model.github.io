@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('video.speed-2x').forEach(function (v) {
+        v.addEventListener('loadedmetadata', function () { v.playbackRate = 2.0; });
+        v.addEventListener('play', function () { v.playbackRate = 2.0; });
+    });
+
     document.querySelectorAll('#indomain-tabs li').forEach(function (tab) {
         tab.addEventListener('click', function () {
             var task = this.getAttribute('data-task');
