@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="ViVa: A Video-Generative Value Model for Robot Reinforcement Learning">
+    <meta name="keywords" content="ViVa, Robot Learning, Value Function, Video Generation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ViVa: A Video-Generative Value Model for Robot Reinforcement Learning</title>
+
+    <link rel="stylesheet" href="./assets/bulma.min.css">
+    <link rel="stylesheet" href="./assets/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./assets/bulma-slider.min.css">
+    <link rel="stylesheet" href="./assets/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./assets/academicons.min.css">
+    <link rel="stylesheet" href="./assets/index.css">
+
+    <script src="./assets/jquery.min.js"></script>
+    <script defer src="./assets/fontawesome.all.min.js"></script>
+    <script src="./assets/bulma-carousel.min.js"></script>
+    <script src="./assets/bulma-slider.min.js"></script>
+    <script src="./script.js" defer></script>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">ViVa: A Video-Generative Value Model for Robot Reinforcement Learning</h1>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">Jindi Lv,</span>
+                        <span class="author-block">Hao Li,</span>
+                        <span class="author-block">Jie Li,</span>
+                        <span class="author-block">Yifei Nie,</span>
+                        <span class="author-block">Fankun Kong,</span>
+                        <span class="author-block">Yang Wang,</span>
+                        <span class="author-block">Xiaofeng Wang,</span>
+                        <span class="author-block">Zheng Zhu,</span>
+                        <span class="author-block">Chaojun Ni,</span>
+                        <span class="author-block">Qiuping Deng,</span>
+                        <span class="author-block">Hengtao Li,</span>
+                        <span class="author-block">Jiancheng Lv,</span>
+                        <span class="author-block">Guan Huang</span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">ECCV 2026</span>
+                    </div>
+                    
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <span class="link-block">
+                                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <img id="teaser" src="./assets/images/figure1.png" style="width:100%;height:100%;" alt="Figure 1: ViVa Framework Illustration">
+            <p style="font-size: 16px;">
+                <b>Illustration of ViVa.</b> Given the current multi-view observations and robot proprioception, 
+                ViVa jointly predicts the future proprioceptive state and a scalar value representing task progress 
+                toward successful completion. By grounding value estimation in anticipated embodiment dynamics, 
+                ViVa leverages the spatiotemporal priors of pretrained video generation models to incorporate 
+                predictive structure beyond static snapshots.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Vision-language-action (VLA) models have advanced robot manipulation through large-scale 
+                        pretraining, but real-world deployment remains challenging due to partial observability and 
+                        delayed feedback. Reinforcement learning addresses this via value functions, which assess task 
+                        progress and guide policy improvement. However, existing value models built on vision-language 
+                        models (VLMs) struggle to capture temporal dynamics, undermining reliable value estimation in 
+                        long-horizon tasks.
+                    </p>
+                    <p>
+                        In this paper, we propose <strong>ViVa</strong>, a video-generative value model that repurposes 
+                        a pretrained video generator for value estimation. Taking the current observation and robot 
+                        proprioception as input, ViVa jointly predicts future proprioception and a scalar value for 
+                        the current state. By leveraging the spatiotemporal priors of a pretrained video generator, 
+                        our approach grounds value estimation in anticipated embodiment dynamics, moving beyond static 
+                        snapshots to intrinsically couple value with foresight.
+                    </p>
+                    <p>
+                        Integrated into RECAP, ViVa delivers substantial improvements on real-world box assembly. 
+                        Qualitative analysis across all three tasks confirms that ViVa produces more reliable value 
+                        signals, accurately reflecting task progress. By leveraging spatiotemporal priors from video 
+                        corpora, ViVa also generalizes to novel objects, highlighting the promise of video-generative 
+                        models for value estimation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Key Contributions</h2>
+                <div class="content has-text-justified">
+                    <ul>
+                        <li>
+                            We identify that <strong>value estimation in robotic reinforcement learning is fundamentally 
+                            a future anticipation problem</strong>. Video generative models, trained to capture spatiotemporal 
+                            evolution, offer a more natural foundation for value learning than discriminative VLMs trained 
+                            on static data.
+                        </li>
+                        <li>
+                            We introduce <strong>ViVa</strong>, a video-generative value model that intrinsically couples 
+                            value with foresight by jointly predicting future embodiment dynamics alongside the current value.
+                        </li>
+                        <li>
+                            ViVa achieves <strong>substantial gains on box assembly</strong> in both success rate and 
+                            throughput. Qualitative analysis across all three tasks confirms more reliable value signals 
+                            and strong generalization to novel objects.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Approach Overview</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        ViVa repurposes a pretrained video generator as a value function for robotic reinforcement 
+                        learning. By leveraging the spatiotemporal priors learned from large-scale video corpora, our 
+                        model captures rich dynamics about how scenes evolve over time. Taking the current observation 
+                        together with robot proprioception as input, ViVa jointly predicts future proprioception and a 
+                        scalar value for the current state.
+                    </p>
+                </div>
+                <img src="./assets/images/method.png" style="width:100%;" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22%3E%3Crect fill=%22%23f8f9fa%22 width=%22800%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%23666%22%3EMethod Diagram: ViVa Architecture%3C/text%3E%3C/svg%3E';">
+                <div class="content has-text-justified" style="margin-top: 20px;">
+                    <p>
+                        Grounding value estimation in anticipated embodiment dynamics enables ViVa to incorporate 
+                        predictive structure beyond static snapshots, intrinsically coupling value with foresight. This 
+                        design provides more reliable value signals for advantage computation, leading to improved policy 
+                        optimization in robotic manipulation tasks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Results</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We integrate our video-grounded value model into the RECAP pipeline, replacing the original 
+                        VLM-based value function. For the challenging real-world task of box assembly, our approach 
+                        demonstrates clear superiority over prior methods.
+                    </p>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column">
+                        <img src="./assets/images/results_1.png" style="width:100%;" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23e8f5e9%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%23666%22%3EPerformance Comparison%3C/text%3E%3C/svg%3E';">
+                    </div>
+                    <div class="column">
+                        <img src="./assets/images/results_2.png" style="width:100%;" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23e3f2fd%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%23666%22%3EGeneralization Results%3C/text%3E%3C/svg%3E';">
+                    </div>
+                </div>
+                <div class="content has-text-justified">
+                    <p>
+                        Qualitative analysis across all three tasks further confirms that ViVa produces more reliable 
+                        value signals, accurately tracking task progress and detecting execution errors. By leveraging 
+                        spatiotemporal priors learned from video corpora, ViVa also generalizes to novel objects where 
+                        previous methods struggle.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="qualitative-results">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column">
+                <h2 class="title is-3">Qualitative Results</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We show qualitative demonstrations of ViVa across four real-world manipulation tasks:
+                        <strong>Box Packaging</strong>, <strong>Pants Folding</strong>, <strong>Paper Organizing</strong>,
+                        and <strong>Shirt Folding</strong>. Each task includes multiple rollout examples showcasing
+                        ViVa's reliable value estimation and strong generalization capabilities.
+                    </p>
+                </div>
+
+                <!-- Task Tabs -->
+                <div class="tabs is-centered is-boxed is-medium" id="task-tabs">
+                    <ul>
+                        <li class="is-active" data-task="box_packaging"><a>Box Packaging</a></li>
+                        <li data-task="pants_folding"><a>Pants Folding</a></li>
+                        <li data-task="paper_organizing"><a>Paper Organizing</a></li>
+                        <li data-task="shirt_folding"><a>Shirt Folding</a></li>
+                    </ul>
+                </div>
+
+                <!-- Box Packaging -->
+                <div class="task-content" id="tab-box_packaging">
+                    <div class="columns is-multiline">
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pants Folding -->
+                <div class="task-content" id="tab-pants_folding" style="display:none;">
+                    <div class="columns is-multiline">
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paper Organizing -->
+                <div class="task-content" id="tab-paper_organizing" style="display:none;">
+                    <div class="columns is-multiline">
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shirt Folding -->
+                <div class="task-content" id="tab-shirt_folding" style="display:none;">
+                    <div class="columns is-multiline">
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 1</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 2</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 3</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="column is-half">
+                            <p class="has-text-weight-semibold mb-1">Example 4</p>
+                            <video controls playsinline style="width:100%;border-radius:8px;">
+                                <source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@article{viva2026,
+  title={ViVa: A Video-Generative Value Model for Robot Reinforcement Learning},
+  author={Anonymous ECCV 2026 Submission},
+  journal={ECCV 2026 Submission},
+  year={2026},
+  note={Paper ID #9020}
+}</code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                Website adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies template</a>.
+            </p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
