@@ -7,18 +7,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ViVa: A Video-Generative Value Model for Robot Reinforcement Learning</title>
 
-    <link rel="stylesheet" href="./assets/bulma.min.css">
-    <link rel="stylesheet" href="./assets/bulma-carousel.min.css">
-    <link rel="stylesheet" href="./assets/bulma-slider.min.css">
-    <link rel="stylesheet" href="./assets/fontawesome.all.min.css">
-    <link rel="stylesheet" href="./assets/academicons.min.css">
-    <link rel="stylesheet" href="./assets/index.css">
+    <!-- Replaced local assets with CDNs for standalone functionality -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="./assets/jquery.min.js"></script>
-    <script defer src="./assets/fontawesome.all.min.js"></script>
-    <script src="./assets/bulma-carousel.min.js"></script>
-    <script src="./assets/bulma-slider.min.js"></script>
-    <script src="./script.js" defer></script>
+    <style>
+        /* Custom CSS to replace index.css */
+        body {
+            font-family: 'BlinkMacSystemFont', -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            color: #4a4a4a;
+        }
+        .hero {
+            background-color: #fafafa;
+        }
+        .publication-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem !important;
+        }
+        .publication-authors {
+            margin-bottom: 1rem;
+        }
+        .author-block {
+            display: inline-block;
+            margin-right: 0.8rem;
+        }
+        .publication-links {
+            margin-top: 1.5rem;
+        }
+        .link-block {
+            display: inline-block;
+            margin: 0 0.25rem 0.5rem;
+        }
+        .link-block a {
+            transition: all 0.2s;
+        }
+        .link-block a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .teaser img {
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+        video {
+            background-color: #f5f5f5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            width: 100%;
+        }
+        .tabs {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .footer {
+            padding: 3rem 1.5rem;
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,23 +83,25 @@
                 <div class="column has-text-centered">
                     <h1 class="title is-1 publication-title">ViVa: A Video-Generative Value Model for Robot Reinforcement Learning</h1>
                     <div class="is-size-5 publication-authors">
-                        <span class="author-block">Jindi Lv,</span>
-                        <span class="author-block">Hao Li,</span>
-                        <span class="author-block">Jie Li,</span>
-                        <span class="author-block">Yifei Nie,</span>
-                        <span class="author-block">Fankun Kong,</span>
-                        <span class="author-block">Yang Wang,</span>
-                        <span class="author-block">Xiaofeng Wang,</span>
-                        <span class="author-block">Zheng Zhu,</span>
-                        <span class="author-block">Chaojun Ni,</span>
-                        <span class="author-block">Qiuping Deng,</span>
-                        <span class="author-block">Hengtao Li,</span>
-                        <span class="author-block">Jiancheng Lv,</span>
-                        <span class="author-block">Guan Huang</span>
+                        <span class="author-block">Jindi Lv<sup>1,2*</sup>,</span>
+                        <span class="author-block">Hao Li<sup>1*</sup>,</span>
+                        <span class="author-block">Jie Li<sup>1</sup>,</span>
+                        <span class="author-block">Yifei Nie<sup>1</sup>,</span>
+                        <span class="author-block">Fankun Kong<sup>1</sup>,</span>
+                        <span class="author-block">Yang Wang<sup>1</sup>,</span>
+                        <span class="author-block">Xiaofeng Wang<sup>1,3</sup>,</span>
+                        <span class="author-block">Zheng Zhu<sup>1</sup>,</span>
+                        <span class="author-block">Chaojun Ni<sup>1</sup>,</span>
+                        <span class="author-block">Qiuping Deng<sup>1</sup>,</span>
+                        <span class="author-block">Hengtao Li<sup>1</sup>,</span>
+                        <span class="author-block">Jiancheng Lv<sup>2</sup>,</span>
+                        <span class="author-block">Guan Huang<sup>1</sup></span>
                     </div>
 
-                    <div class="is-size-5 publication-authors">
-                        <span class="author-block"><i>Under Review</i></span>
+                    <div class="is-size-6 publication-authors" style="margin-top: 10px;">
+                        <span class="author-block"><sup>1</sup>GigaAI</span>
+                        <span class="author-block"><sup>2</sup>Sichuan University</span>
+                        <span class="author-block"><sup>3</sup>Tsinghua University</span>
                     </div>
                     
                     <div class="column has-text-centered">
@@ -76,9 +132,10 @@
 
 <section class="hero teaser">
     <div class="container is-max-desktop">
-        <div class="hero-body">
-            <img id="teaser" src="./assets/images/figure1.png" style="width:100%;height:100%;" alt="Figure 1: ViVa Framework Illustration">
-            <p style="font-size: 16px;">
+        <div class="hero-body pt-0">
+            <!-- Added fallback image data URI in case local asset is missing -->
+            <img id="teaser" src="./assets/images/figure1.png" style="width:100%;height:100%;" alt="Figure 1: ViVa Framework Illustration" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'300\'><rect width=\'100%\' height=\'100%\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'20\' fill=\'%2364748b\'>Figure 1: ViVa Framework Illustration (Image Placeholder)</text></svg>'">
+            <p style="font-size: 16px;" class="has-text-justified mt-4">
                 <b>Illustration of ViVa.</b> Given the current multi-view observations and robot proprioception, 
                 ViVa jointly predicts the future proprioceptive state and a scalar value representing task progress 
                 toward successful completion. By grounding value estimation in anticipated embodiment dynamics, 
@@ -89,7 +146,7 @@
     </div>
 </section>
 
-<section class="section">
+<section class="section pt-0">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
@@ -124,7 +181,6 @@
     </div>
 </section>
 
-
 <section class="section">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
@@ -139,8 +195,8 @@
                         scalar value for the current state.
                     </p>
                 </div>
-                <img src="./assets/images/method.png" style="width:100%;" 
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22%3E%3Crect fill=%22%23f8f9fa%22 width=%22800%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%23666%22%3EMethod Diagram: ViVa Architecture%3C/text%3E%3C/svg%3E';">
+                <img src="./assets/images/method.png" style="width:100%; border-radius: 8px;" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22350%22%3E%3Crect fill=%22%23e2e8f0%22 width=%22800%22 height=%22350%22 rx=%228%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2220%22 fill=%22%2364748b%22%3EMethod Diagram: ViVa Architecture (Image Placeholder)%3C/text%3E%3C/svg%3E';">
                 <div class="content has-text-justified" style="margin-top: 20px;">
                     <p>
                         Grounding value estimation in anticipated embodiment dynamics enables ViVa to incorporate 
@@ -178,42 +234,45 @@
                     </ul>
                 </div>
 
+                <!-- Box Packaging -->
                 <div class="task-content indomain-content" id="indomain-box_packaging">
                     <div class="columns is-multiline">
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 1</text></svg>"><source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 2</text></svg>"><source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 3</text></svg>"><source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 4</text></svg>"><source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
+                <!-- Paper Organizing -->
                 <div class="task-content indomain-content" id="indomain-paper_organizing" style="display:none;">
                     <div class="columns is-multiline">
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 1</text></svg>"><source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 2</text></svg>"><source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 3</text></svg>"><source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 4</text></svg>"><source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
+                <!-- Shirt Folding -->
                 <div class="task-content indomain-content" id="indomain-shirt_folding" style="display:none;">
                     <div class="columns is-multiline">
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 1</text></svg>"><source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 2</text></svg>"><source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 3</text></svg>"><source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4"></video></div>
                         <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4"></video></div>
+                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 4</text></svg>"><source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4"></video></div>
                     </div>
                 </div>
 
@@ -230,13 +289,13 @@
 
                 <div class="columns is-multiline">
                     <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4"></video></div>
+                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 1</text></svg>"><source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4"></video></div>
                     <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4"></video></div>
+                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 2</text></svg>"><source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4"></video></div>
                     <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4"></video></div>
+                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 3</text></svg>"><source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4"></video></div>
                     <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                        <video controls playsinline style="width:100%;border-radius:8px;"><source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4"></video></div>
+                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 4</text></svg>"><source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4"></video></div>
                 </div>
 
             </div>
@@ -249,15 +308,16 @@
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Real-World Results</h2>
-                <img src="./assets/images/real_world_results.png" style="width:100%;">
+                <img src="./assets/images/real_world_results.png" style="width:100%; border-radius: 8px;"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22300%22%3E%3Crect fill=%22%23e2e8f0%22 width=%22800%22 height=%22300%22 rx=%228%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2220%22 fill=%22%2364748b%22%3EReal World Results (Image Placeholder)%3C/text%3E%3C/svg%3E';">
                 <div class="columns is-multiline" style="margin-top:1.5rem;">
                     <div class="column is-half">
-                        <video controls playsinline class="speed-2x" style="width:100%;border-radius:8px;">
+                        <video controls playsinline class="speed-2x" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Real World Result 1</text></svg>">
                             <source src="./assets/videos/real_world_result1.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="column is-half">
-                        <video controls playsinline class="speed-2x" style="width:100%;border-radius:8px;">
+                        <video controls playsinline class="speed-2x" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Real World Result 2</text></svg>">
                             <source src="./assets/videos/real_world_result2.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -288,6 +348,34 @@
         </div>
     </div>
 </footer>
+
+<script>
+    $(document).ready(function() {
+        // Tab functionality for qualitative results section
+        $('.tabs li').on('click', function() {
+            var tab = $(this);
+            var group = tab.data('group');
+            var task = tab.data('task');
+
+            // Update active tab styling
+            $('.tabs li[data-group="' + group + '"]').removeClass('is-active');
+            tab.addClass('is-active');
+
+            // Hide all content for this group, show target
+            $('.task-content.' + group + '-content').hide();
+            $('#' + group + '-' + task).fadeIn(200);
+        });
+
+        // Setup 2x playback speed for labeled videos
+        const fastVideos = document.querySelectorAll('.speed-2x');
+        fastVideos.forEach(vid => {
+            vid.playbackRate = 2.0;
+            vid.addEventListener('play', function() {
+                this.playbackRate = 2.0;
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
