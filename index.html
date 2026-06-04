@@ -55,9 +55,87 @@
         }
         video {
             background-color: #f5f5f5;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            border-radius: 8px 8px 0 0;
             width: 100%;
+            display: block;
+        }
+        .video-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .video-card:hover {
+            border-color: #3273dc;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .video-label {
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4a4a4a;
+            background: #f8fafc;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .video-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 12px 14px;
+            background: #fafafa;
+            border-top: 1px solid #e2e8f0;
+        }
+        .ctrl-btn {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #374151;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .ctrl-btn:hover {
+            border-color: #3273dc;
+            color: #3273dc;
+        }
+        .ctrl-play {
+            background: #3273dc;
+            color: #fff;
+            border-color: #3273dc;
+            min-width: 80px;
+        }
+        .ctrl-play:hover {
+            background: #2769c4;
+            color: #fff;
+        }
+        .ctrl-speed {
+            padding: 5px 8px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #374151;
+            font-size: 0.82rem;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
         }
         .tabs {
             margin-top: 2rem;
@@ -86,9 +164,10 @@
                         <span class="author-block">Jindi Lv<sup>1,2*</sup>,</span>
                         <span class="author-block">Hao Li<sup>1*</sup>,</span>
                         <span class="author-block">Jie Li<sup>1</sup>,</span>
-                        <span class="author-block">Yifei Nie<sup>1</sup>,</span>
                         <span class="author-block">Fankun Kong<sup>1</sup>,</span>
                         <span class="author-block">Yang Wang<sup>1</sup>,</span>
+                        <span class="author-block">Pengfei Yi<sup>1</sup>,</span>
+                        <span class="author-block">Yifei Nie<sup>1</sup>,</span>
                         <span class="author-block">Xiaofeng Wang<sup>1,3</sup>,</span>
                         <span class="author-block">Zheng Zhu<sup>1&dagger;</sup>,</span>
                         <span class="author-block">Chaojun Ni<sup>1</sup>,</span>
@@ -162,23 +241,20 @@
                         pretraining, but real-world deployment remains challenging due to partial observability and 
                         delayed feedback. Reinforcement learning addresses this via value functions, which assess task 
                         progress and guide policy improvement. However, existing value models built on vision-language 
-                        models (VLMs) struggle to capture temporal dynamics, undermining reliable value estimation in 
+                        models (VLMs) struggle to capture temporal dynamics and physical interactions, undermining reliable value estimation in 
                         long-horizon tasks.
                     </p>
                     <p>
-                        In this paper, we propose <strong>ViVa</strong>, a video-generative value model that repurposes 
-                        a pretrained video generator for value estimation. Taking the current observation and robot 
-                        proprioception as input, ViVa jointly predicts future proprioception and a scalar value for 
-                        the current state. By leveraging the spatiotemporal priors of a pretrained video generator, 
-                        our approach grounds value estimation in anticipated embodiment dynamics, moving beyond static 
-                        snapshots to intrinsically couple value with foresight.
+                        In this paper, we propose <strong>ViVa</strong>, a video-generative value model that repurposes
+                        a pretrained video generator to jointly predict future proprioception and a scalar value.
+                        By grounding value estimation in anticipated embodiment dynamics, ViVa leverages spatiotemporal
+                        priors to intrinsically couple value with foresight beyond static snapshots.
                     </p>
                     <p>
-                        Integrated into RECAP, ViVa delivers substantial improvements on real-world box assembly. 
-                        Qualitative analysis across all three tasks confirms that ViVa produces more reliable value 
-                        signals, accurately reflecting task progress. By leveraging spatiotemporal priors from video 
-                        corpora, ViVa also generalizes to novel objects, highlighting the promise of video-generative 
-                        models for value estimation.
+                        ViVa achieves state-of-the-art results in metric-based evaluation across three tasks,
+                        producing reliable value signals that accurately track task progress and detect execution errors.
+                        Integrated into RECAP, it achieves an average success rate of 80%, highlighting the promise of
+                        video-generative models for value estimation.
                     </p>
                 </div>
             </div>
@@ -226,7 +302,7 @@
                 <div class="content has-text-justified">
                     <p>
                         We demonstrate ViVa on three in-domain manipulation tasks: <strong>Box Packaging</strong>,
-                        <strong>Paper Organizing</strong>, and <strong>Shirt Folding</strong>. ViVa produces
+                        <strong>Paper Roll Organization</strong>, and <strong>Shirt Folding</strong>. ViVa produces
                         reliable value signals that accurately track task progress throughout each rollout.
                     </p>
                 </div>
@@ -234,50 +310,146 @@
                 <div class="tabs is-centered is-boxed is-medium" id="indomain-tabs">
                     <ul>
                         <li class="is-active" data-group="indomain" data-task="box_packaging"><a>Box Packaging</a></li>
-                        <li data-group="indomain" data-task="paper_organizing"><a>Paper Organizing</a></li>
+                        <li data-group="indomain" data-task="paper_organizing"><a>Paper Roll Organization</a></li>
                         <li data-group="indomain" data-task="shirt_folding"><a>Shirt Folding</a></li>
                     </ul>
                 </div>
 
                 <!-- Box Packaging -->
                 <div class="task-content indomain-content" id="indomain-box_packaging">
-                    <div class="columns is-multiline">
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 1</text></svg>"><source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 2</text></svg>"><source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 3</text></svg>"><source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Box Packaging Ex 4</text></svg>"><source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4"></video></div>
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/box_packaging/example_1.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 1</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/box_packaging/example_2.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 2</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/box_packaging/example_3.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 3</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/box_packaging/example_4.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 4</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Paper Organizing -->
+                <!-- Paper Roll Organization -->
                 <div class="task-content indomain-content" id="indomain-paper_organizing" style="display:none;">
-                    <div class="columns is-multiline">
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 1</text></svg>"><source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 2</text></svg>"><source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 3</text></svg>"><source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Paper Organizing Ex 4</text></svg>"><source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4"></video></div>
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/paper_organizing/example_1.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 1</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/paper_organizing/example_2.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 2</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/paper_organizing/example_3.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 3</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/paper_organizing/example_4.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 4</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Shirt Folding -->
                 <div class="task-content indomain-content" id="indomain-shirt_folding" style="display:none;">
-                    <div class="columns is-multiline">
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 1</text></svg>"><source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 2</text></svg>"><source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 3</text></svg>"><source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4"></video></div>
-                        <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                            <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Shirt Folding Ex 4</text></svg>"><source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4"></video></div>
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/shirt_folding/example_1.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 1</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/shirt_folding/example_2.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 2</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/shirt_folding/example_3.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 3</div>
+                        </div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline><source src="./assets/videos/shirt_folding/example_4.mp4" type="video/mp4"></video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Example 4</div>
+                        </div>
                     </div>
                 </div>
 
@@ -292,15 +464,47 @@
                     </p>
                 </div>
 
-                <div class="columns is-multiline">
-                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 1</p>
-                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 1</text></svg>"><source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4"></video></div>
-                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 2</p>
-                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 2</text></svg>"><source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4"></video></div>
-                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 3</p>
-                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 3</text></svg>"><source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4"></video></div>
-                    <div class="column is-half"><p class="has-text-weight-semibold mb-1">Example 4</p>
-                        <video controls playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Pants Folding Ex 4</text></svg>"><source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4"></video></div>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video preload="auto" playsinline><source src="./assets/videos/pants_folding/example_1.mp4" type="video/mp4"></video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Example 1</div>
+                    </div>
+                    <div class="video-card">
+                        <video preload="auto" playsinline><source src="./assets/videos/pants_folding/example_2.mp4" type="video/mp4"></video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Example 2</div>
+                    </div>
+                    <div class="video-card">
+                        <video preload="auto" playsinline><source src="./assets/videos/pants_folding/example_3.mp4" type="video/mp4"></video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Example 3</div>
+                    </div>
+                    <div class="video-card">
+                        <video preload="auto" playsinline><source src="./assets/videos/pants_folding/example_4.mp4" type="video/mp4"></video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Example 4</div>
+                    </div>
                 </div>
 
             </div>
@@ -315,19 +519,32 @@
                 <h2 class="title is-3">Real-World Results</h2>
                 <img src="./assets/images/real_world_results.png" style="width:100%; border-radius: 8px;"
                      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22300%22%3E%3Crect fill=%22%23e2e8f0%22 width=%22800%22 height=%22300%22 rx=%228%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2220%22 fill=%22%2364748b%22%3EReal World Results (Image Placeholder)%3C/text%3E%3C/svg%3E';">
-                <div class="columns is-multiline" style="margin-top:1.5rem;">
-                    <div class="column is-half">
-                        <video controls playsinline class="speed-2x" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Real World Result 1</text></svg>">
+                <div class="video-grid" style="margin-top:1.5rem;">
+                    <div class="video-card">
+                        <video preload="auto" playsinline>
                             <source src="./assets/videos/real_world_result1.mp4" type="video/mp4">
                         </video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Real World Demo 1</div>
                     </div>
-                    <div class="column is-half">
-                        <video controls playsinline class="speed-2x" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='#ddd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='#666'>Video: Real World Result 2</text></svg>">
+                    <div class="video-card">
+                        <video preload="auto" playsinline>
                             <source src="./assets/videos/real_world_result2.mp4" type="video/mp4">
                         </video>
+                        <div class="video-controls">
+                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        </div>
+                        <div class="video-label">Real World Demo 2</div>
                     </div>
                 </div>
-                <p style="text-align:center;color:#888;font-size:0.9em;margin-top:0.25rem;">Videos played at 2× speed</p>
             </div>
         </div>
     </div>
@@ -338,7 +555,7 @@
         <h2 class="title">BibTeX</h2>
         <pre><code>@article{viva2026,
   title={ViVa: A Video-Generative Value Model for Robot Reinforcement Learning},
-  author={Lv, Jindi and Li, Hao and Li, Jie and Nie, Yifei and Kong, Fankun and Wang, Yang and Wang, Xiaofeng and Zhu, Zheng and Ni, Chaojun and Deng, Qiuping and Li, Hengtao and Lv, Jiancheng and Huang, Guan},
+  author={Lv, Jindi and Li, Hao and Li, Jie and Kong, Fankun and Wang, Yang and Yi, Pengfei and Nie, Yifei and Wang, Xiaofeng and Zhu, Zheng and Ni, Chaojun and Deng, Qiuping and Li, Hengtao and Lv, Jiancheng and Huang, Guan},
   year={2026},
   url={http://arxiv.org/abs/2604.08168}
 }</code></pre>
@@ -371,14 +588,50 @@
             $('.task-content.' + group + '-content').hide();
             $('#' + group + '-' + task).fadeIn(200);
         });
+    });
 
-        // Setup 2x playback speed for labeled videos
-        const fastVideos = document.querySelectorAll('.speed-2x');
-        fastVideos.forEach(vid => {
-            vid.playbackRate = 2.0;
-            vid.addEventListener('play', function() {
-                this.playbackRate = 2.0;
+    // Video controls: play/pause, seek, speed
+    document.querySelectorAll('.video-card').forEach(function(card) {
+        var video = card.querySelector('video');
+        var playBtn = card.querySelector('.ctrl-play');
+        var seekBtns = card.querySelectorAll('.ctrl-seek');
+        var speedSel = card.querySelector('.ctrl-speed');
+
+        if (!video) return;
+
+        // Play / Pause toggle
+        if (playBtn) {
+            playBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    playBtn.innerHTML = '❚❚ Pause';
+                } else {
+                    video.pause();
+                    playBtn.innerHTML = '▶ Play';
+                }
             });
+        }
+
+        // Seek forward / backward
+        seekBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var sec = parseFloat(btn.getAttribute('data-seek'));
+                if (!isNaN(sec) && video.duration) {
+                    video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + sec));
+                }
+            });
+        });
+
+        // Speed selector
+        if (speedSel) {
+            speedSel.addEventListener('change', function() {
+                video.playbackRate = parseFloat(speedSel.value);
+            });
+        }
+
+        // Update button text when video ends
+        video.addEventListener('ended', function() {
+            if (playBtn) playBtn.innerHTML = '▶ Play';
         });
     });
 </script>
