@@ -583,242 +583,118 @@
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Real-World Results</h2>
-                <!-- Group 1: Table 5 + Table 6 -->
-                <div class="result-row">
-                    <!-- Table 5 -->
-                    <div class="result-table">
-                        <div class="result-table-title">Table 5: Real-robot experiment results. Success rates (%) on three manipulation tasks.</div>
-                        <div class="result-table-header" style="grid-template-columns: 2fr 1fr 1fr 1fr 1fr;">
-                            <div class="cell">Method</div>
-                            <div class="cell cell-center">Shirt (%)</div>
-                            <div class="cell cell-center">Box (%)</div>
-                            <div class="cell cell-center">Paper (%)</div>
-                            <div class="cell cell-center">Avg (%)</div>
-                        </div>
-                        <div class="group-label">Imitation learning</div>
-                        <div class="result-table-row" style="grid-template-columns: 2fr 1fr 1fr 1fr 1fr;">
-                            <div class="cell">&pi;<sub>0.5</sub></div>
-                            <div class="cell cell-center">60.0</div>
-                            <div class="cell cell-center">40.0</div>
-                            <div class="cell cell-center">40.0</div>
-                            <div class="cell cell-center">46.7</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 2fr 1fr 1fr 1fr 1fr;">
-                            <div class="cell">Gigabrain-0</div>
-                            <div class="cell cell-center">50.0</div>
-                            <div class="cell cell-center">50.0</div>
-                            <div class="cell cell-center">20.0</div>
-                            <div class="cell cell-center">40.0</div>
-                        </div>
-                        <div class="group-label">Reinforcement Learning</div>
-                        <div class="result-table-row" style="grid-template-columns: 2fr 1fr 1fr 1fr 1fr;">
-                            <div class="cell">RECAP (VLM)</div>
-                            <div class="cell cell-center">70.0</div>
-                            <div class="cell cell-center">60.0</div>
-                            <div class="cell cell-center">60.0</div>
-                            <div class="cell cell-center">63.3</div>
-                        </div>
-                        <div class="result-table-row highlight" style="grid-template-columns: 2fr 1fr 1fr 1fr 1fr;">
-                            <div class="cell"><strong>RECAP (ViVa)</strong></div>
-                            <div class="cell cell-center"><strong>90.0</strong></div>
-                            <div class="cell cell-center"><strong>70.0</strong></div>
-                            <div class="cell cell-center"><strong>80.0</strong></div>
-                            <div class="cell cell-center"><strong>80.0</strong></div>
-                        </div>
-                    </div>
+                <!-- Table 5 -->
+                <div style="margin: 0 auto 2.5rem; max-width: 600px;">
+                    <p class="has-text-justified" style="font-size: 1rem; color: #4a4a4a; margin-bottom: 0.75rem; line-height: 1.6;">
+                        Real-robot experiment results. Success rates (%) on three manipulation tasks. RECAP (ViVa) outperforms both imitation learning baselines and RECAP (VLM) on all tasks.
+                    </p>
+                    <img src="./assets/images/real_world_results_renew.png" style="width:100%; border-radius: 4px;">
+                </div>
 
-                    <!-- Table 6 -->
-                    <div class="result-table">
-                        <div class="result-table-title">Table 6: Ablation on architecture design for box packaging. VG denotes video generator.</div>
-                        <div class="result-table-header" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">Method</div>
-                            <div class="cell cell-center">Backbone</div>
-                            <div class="cell cell-center">Input<br>State</div>
-                            <div class="cell cell-center">Future<br>State</div>
-                            <div class="cell cell-center">MS</div>
-                            <div class="cell cell-center">ES</div>
-                            <div class="cell cell-center">MDR</div>
-                            <div class="cell cell-center">ErrDR</div>
+                <!-- Figure 7 -->
+                <div style="margin-bottom: 2.5rem;">
+                    <p class="has-text-justified" style="font-size: 1rem; color: #4a4a4a; margin-bottom: 0.75rem; line-height: 1.6;">
+                        Rollout-wise performance evolution across three manipulation tasks. Both methods improve over successive rounds, with RECAP (ViVa) achieving the best overall performance.
+                    </p>
+                    <img src="./assets/images/real_world_results_column.png" style="width:100%; border-radius: 4px;">
+                </div>
+
+                <!-- Real-World Video Tabs -->
+                <div class="tabs is-centered is-boxed is-medium" id="realworld-tabs">
+                    <ul>
+                        <li class="is-active" data-group="realworld" data-task="box_packaging"><a>Box Packaging</a></li>
+                        <li data-group="realworld" data-task="paper_roll"><a>Paper Roll Organization</a></li>
+                        <li data-group="realworld" data-task="shirt_folding"><a>Shirt Folding</a></li>
+                    </ul>
+                </div>
+
+                <!-- Box Packaging -->
+                <div class="task-content realworld-content" id="realworld-box_packaging">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/boxs_real_world_result1.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Box Packaging Demo 1</div>
                         </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">&pi;*<sub>0.6</sub></div>
-                            <div class="cell cell-center">VLM</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.013</div>
-                            <div class="cell cell-center">0.006</div>
-                            <div class="cell cell-center">0.765</div>
-                            <div class="cell cell-center">0.506</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">VG-only</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.048</div>
-                            <div class="cell cell-center">0.004</div>
-                            <div class="cell cell-center">0.853</div>
-                            <div class="cell cell-center">0.449</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">ViVa w/o fut</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10003;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.047</div>
-                            <div class="cell cell-center">0.008</div>
-                            <div class="cell cell-center">0.778</div>
-                            <div class="cell cell-center">0.527</div>
-                        </div>
-                        <div class="result-table-row highlight" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell"><strong>ViVa</strong></div>
-                            <div class="cell cell-center"><strong>VG</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>0.034</strong></div>
-                            <div class="cell cell-center"><strong>0.026</strong></div>
-                            <div class="cell cell-center"><strong>0.733</strong></div>
-                            <div class="cell cell-center"><strong>0.612</strong></div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/boxs_real_world_result2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Box Packaging Demo 2</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Group 2: Table 7 + Table 8 -->
-                <div class="result-row">
-                    <!-- Table 7 -->
-                    <div class="result-table">
-                        <div class="result-table-title">Table 7: Ablation on architecture design for shirt folding. VG denotes video generator.</div>
-                        <div class="result-table-header" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">Method</div>
-                            <div class="cell cell-center">Backbone</div>
-                            <div class="cell cell-center">Input<br>State</div>
-                            <div class="cell cell-center">Future<br>State</div>
-                            <div class="cell cell-center">MS</div>
-                            <div class="cell cell-center">ES</div>
-                            <div class="cell cell-center">MDR</div>
-                            <div class="cell cell-center">ErrDR</div>
+                <!-- Paper Roll Organization -->
+                <div class="task-content realworld-content" id="realworld-paper_roll" style="display:none;">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/paper_real_world_result1.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Paper Roll Demo 1</div>
                         </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">&pi;*<sub>0.6</sub></div>
-                            <div class="cell cell-center">VLM</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">-0.266</div>
-                            <div class="cell cell-center">-0.299</div>
-                            <div class="cell cell-center">0.407</div>
-                            <div class="cell cell-center">0.500</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">VG-only</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.137</div>
-                            <div class="cell cell-center">-0.026</div>
-                            <div class="cell cell-center">1.000</div>
-                            <div class="cell cell-center">0.500</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">ViVa w/o fut</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10003;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.093</div>
-                            <div class="cell cell-center">0.006</div>
-                            <div class="cell cell-center">0.998</div>
-                            <div class="cell cell-center">1.000</div>
-                        </div>
-                        <div class="result-table-row highlight" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell"><strong>ViVa</strong></div>
-                            <div class="cell cell-center"><strong>VG</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>0.095</strong></div>
-                            <div class="cell cell-center"><strong>0.012</strong></div>
-                            <div class="cell cell-center"><strong>0.990</strong></div>
-                            <div class="cell cell-center"><strong>1.000</strong></div>
-                        </div>
-                    </div>
-
-                    <!-- Table 8 -->
-                    <div class="result-table">
-                        <div class="result-table-title">Table 8: Ablation on architecture design for paper roll organization. VG denotes video generator.</div>
-                        <div class="result-table-header" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">Method</div>
-                            <div class="cell cell-center">Backbone</div>
-                            <div class="cell cell-center">Input<br>State</div>
-                            <div class="cell cell-center">Future<br>State</div>
-                            <div class="cell cell-center">MS</div>
-                            <div class="cell cell-center">ES</div>
-                            <div class="cell cell-center">MDR</div>
-                            <div class="cell cell-center">ErrDR</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">&pi;*<sub>0.6</sub></div>
-                            <div class="cell cell-center">VLM</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.023</div>
-                            <div class="cell cell-center">0.028</div>
-                            <div class="cell cell-center">0.704</div>
-                            <div class="cell cell-center">0.667</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">VG-only</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.016</div>
-                            <div class="cell cell-center">-0.011</div>
-                            <div class="cell cell-center">0.651</div>
-                            <div class="cell cell-center">0.444</div>
-                        </div>
-                        <div class="result-table-row" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell">ViVa w/o fut</div>
-                            <div class="cell cell-center">VG</div>
-                            <div class="cell cell-center">&#10003;</div>
-                            <div class="cell cell-center">&#10007;</div>
-                            <div class="cell cell-center">0.019</div>
-                            <div class="cell cell-center">-0.043</div>
-                            <div class="cell cell-center">0.644</div>
-                            <div class="cell cell-center">0.444</div>
-                        </div>
-                        <div class="result-table-row highlight" style="grid-template-columns: 1.3fr 0.8fr 0.75fr 0.75fr 0.8fr 0.8fr 0.8fr 0.8fr;">
-                            <div class="cell"><strong>ViVa</strong></div>
-                            <div class="cell cell-center"><strong>VG</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>&#10003;</strong></div>
-                            <div class="cell cell-center"><strong>0.039</strong></div>
-                            <div class="cell cell-center"><strong>0.055</strong></div>
-                            <div class="cell cell-center"><strong>0.762</strong></div>
-                            <div class="cell cell-center"><strong>0.778</strong></div>
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/paper_real_world_result2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Paper Roll Demo 2</div>
                         </div>
                     </div>
                 </div>
-                <div class="video-grid" style="margin-top:1.5rem;">
-                    <div class="video-card">
-                        <video preload="auto" playsinline>
-                            <source src="./assets/videos/real_world_result1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-controls">
-                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
-                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
-                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
-                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+
+                <!-- Shirt Folding -->
+                <div class="task-content realworld-content" id="realworld-shirt_folding" style="display:none;">
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/shirt_real_world_result1.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Shirt Folding Demo 1</div>
                         </div>
-                        <div class="video-label">Real World Demo 1</div>
-                    </div>
-                    <div class="video-card">
-                        <video preload="auto" playsinline>
-                            <source src="./assets/videos/real_world_result2.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-controls">
-                            <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
-                            <button class="ctrl-btn ctrl-play">&#9654; Play</button>
-                            <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
-                            <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                        <div class="video-card">
+                            <video preload="auto" playsinline>
+                                <source src="./assets/videos/shirt_real_world_result2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-controls">
+                                <button class="ctrl-btn ctrl-seek" data-seek="-10">&#9664;&#9664;</button>
+                                <button class="ctrl-btn ctrl-play">&#9654; Play</button>
+                                <button class="ctrl-btn ctrl-seek" data-seek="10">&#9654;&#9654;</button>
+                                <select class="ctrl-speed"><option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+                            </div>
+                            <div class="video-label">Shirt Folding Demo 2</div>
                         </div>
-                        <div class="video-label">Real World Demo 2</div>
                     </div>
                 </div>
             </div>

@@ -1,19 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Tab switching
-    document.querySelectorAll('#indomain-tabs li').forEach(function (tab) {
-        tab.addEventListener('click', function () {
-            var task = this.getAttribute('data-task');
-            document.querySelectorAll('#indomain-tabs li').forEach(function (t) {
-                t.classList.remove('is-active');
+    function setupTabs(tabId, contentClass, prefix) {
+        document.querySelectorAll('#' + tabId + ' li').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var task = this.getAttribute('data-task');
+                document.querySelectorAll('#' + tabId + ' li').forEach(function (t) {
+                    t.classList.remove('is-active');
+                });
+                document.querySelectorAll('.' + contentClass).forEach(function (c) {
+                    c.style.display = 'none';
+                });
+                this.classList.add('is-active');
+                var content = document.getElementById(prefix + task);
+                if (content) content.style.display = 'block';
             });
-            document.querySelectorAll('.indomain-content').forEach(function (c) {
-                c.style.display = 'none';
-            });
-            this.classList.add('is-active');
-            var content = document.getElementById('indomain-' + task);
-            if (content) content.style.display = 'block';
         });
-    });
+    }
+
+    setupTabs('indomain-tabs', 'indomain-content', 'indomain-');
+    setupTabs('realworld-tabs', 'realworld-content', 'realworld-');
 
     // Video controls: play/pause, seek, speed
     document.querySelectorAll('.video-card').forEach(function (card) {
